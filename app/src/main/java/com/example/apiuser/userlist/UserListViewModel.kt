@@ -27,7 +27,6 @@ class UserListViewModel
                 val result = repository.getUserList(API_RESULTS)
                 when (result) {
                     is Resource.Success -> {
-
                         loadError.value = ""
                     }
                     is Resource.Error -> {
