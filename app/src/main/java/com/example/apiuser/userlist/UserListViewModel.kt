@@ -1,5 +1,6 @@
 package com.example.apiuser.userlist
 
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.apiuser.repository.UserRepository
@@ -15,6 +16,8 @@ class UserListViewModel
     constructor(
         private val repository: UserRepository,
     ) : ViewModel() {
+        val loadError = mutableStateOf("")
+
         init {
             loadUsers()
         }
@@ -24,8 +27,11 @@ class UserListViewModel
                 val result = repository.getUserList(API_RESULTS)
                 when (result) {
                     is Resource.Success -> {
+
+                        loadError.value = ""
                     }
                     is Resource.Error -> {
+                        loadError.value = result.message!!
                     }
                 }
             }
