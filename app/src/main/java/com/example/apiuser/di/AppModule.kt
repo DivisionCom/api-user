@@ -25,7 +25,7 @@ object AppModule {
     @Provides
     fun provideUserApi(): UserApi {
         val interceptor = HttpLoggingInterceptor()
-        interceptor.level =HttpLoggingInterceptor.Level.BODY
+        interceptor.level = HttpLoggingInterceptor.Level.BODY
 
         val client =
             OkHttpClient.Builder()

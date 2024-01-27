@@ -6,9 +6,9 @@ import javax.inject.Inject
 
 @ActivityScoped
 class UserRepository
-@Inject
-constructor(
-    private val api: UserApi,
-) {
+    @Inject
+    constructor(
+        private val api: UserApi,
+    ) {
 
-}
+    }
