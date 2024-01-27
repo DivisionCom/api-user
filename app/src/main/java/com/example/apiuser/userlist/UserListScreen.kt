@@ -22,7 +22,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import timber.log.Timber
 
 @Composable
 fun UserListScreen(
@@ -42,12 +41,14 @@ fun UserList(
     navController: NavController,
     viewModel: UserListViewModel = hiltViewModel(),
 ) {
+    val userList by remember {
+        viewModel.userList
+    }
     val loadError by remember {
         viewModel.loadError
     }
-    
-    LazyColumn(contentPadding = PaddingValues(16.dp)) {
 
+    LazyColumn(contentPadding = PaddingValues(16.dp)) {
     }
 
     Box(
