@@ -3,6 +3,7 @@ package com.example.apiuser.userlist
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -22,6 +23,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.example.apiuser.data.models.UserListEntry
 
 @Composable
 fun UserListScreen(
@@ -56,7 +58,7 @@ fun UserList(
                 userList.size + 1
             }
         items(itemCount) {
-
+            UserRow(rowIndex = it, entries =  userList, navController = navController)
         }
     }
 
@@ -72,6 +74,18 @@ fun UserList(
             }
         }
     }
+}
+
+@Composable
+fun UserRow(
+    rowIndex: Int,
+    entries: List<UserListEntry>,
+    navController: NavController,
+) {
+    Row{
+
+    }
+    Spacer(modifier = Modifier.height(16.dp))
 }
 
 @Composable
