@@ -49,6 +49,15 @@ fun UserList(
     }
 
     LazyColumn(contentPadding = PaddingValues(16.dp)) {
+        val itemCount =
+            if (userList.size % 2 == 0) {
+                userList.size
+            } else {
+                userList.size + 1
+            }
+        items(itemCount) {
+
+        }
     }
 
     Box(
