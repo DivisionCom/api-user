@@ -33,9 +33,10 @@ class UserListViewModel
                             result.data?.results?.mapIndexed { index, entry ->
                                 UserListEntry(
                                     name = entry.name,
-                                    photo = entry.picture.medium,
-                                    address = entry.location.street,
+                                    photo = entry.picture,
+                                    street = entry.location.street,
                                     phone = entry.phone,
+                                    city = entry.location.city,
                                 )
                             }
 
