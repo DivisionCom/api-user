@@ -40,6 +40,7 @@ import androidx.navigation.NavController
 import coil.compose.SubcomposeAsyncImage
 import coil.request.ImageRequest
 import com.example.apiuser.data.models.UserListEntry
+import com.example.apiuser.ui.theme.RobotoCondensed
 import timber.log.Timber
 
 @Composable
@@ -129,6 +130,7 @@ fun UserEntry(
                 },
     ) {
         Column {
+            Spacer(modifier = Modifier.height(8.dp))
             SubcomposeAsyncImage(
                 model =
                     ImageRequest.Builder(LocalContext.current)
@@ -150,23 +152,30 @@ fun UserEntry(
                         .clip(RoundedCornerShape(10.dp))
                         .border(1.dp, Color.White, RoundedCornerShape(10.dp)),
             )
+            Spacer(modifier = Modifier.height(8.dp))
             Text(
                 text = "${entry.name.title} ${entry.name.first} ${entry.name.last}",
                 textAlign = TextAlign.Center,
+                fontFamily = RobotoCondensed,
+                fontSize = 18.sp,
                 modifier =
                     Modifier
                         .fillMaxWidth(),
             )
+            Spacer(modifier = Modifier.height(8.dp))
             Text(
                 text = "${entry.street.number} ${entry.street.name}, ${entry.city}",
                 textAlign = TextAlign.Center,
+                fontSize = 18.sp,
                 modifier =
                     Modifier
                         .fillMaxWidth(),
             )
+            Spacer(modifier = Modifier.height(8.dp))
             Text(
                 text = "Phone: ${entry.phone}",
                 textAlign = TextAlign.Center,
+                fontSize = 18.sp,
                 modifier =
                     Modifier
                         .fillMaxWidth(),
