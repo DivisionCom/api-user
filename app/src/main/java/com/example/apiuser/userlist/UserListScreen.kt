@@ -1,13 +1,18 @@
 package com.example.apiuser.userlist
 
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -18,13 +23,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.apiuser.data.models.UserListEntry
-import dagger.hilt.android.lifecycle.HiltViewModel
+import timber.log.Timber
 
 @Composable
 fun UserListScreen(
@@ -50,7 +57,7 @@ fun UserList(
     val loadError by remember {
         viewModel.loadError
     }
-
+    Timber.d("UserDebug: ${userList.size}")
     LazyColumn(contentPadding = PaddingValues(16.dp)) {
         val itemCount =
             if (userList.size % 2 == 0) {
@@ -59,7 +66,7 @@ fun UserList(
                 userList.size + 1
             }
         items(itemCount) {
-            UserRow(rowIndex = it, entries =  userList, navController = navController)
+            UserRow(rowIndex = it, entries = userList, navController = navController)
         }
     }
 
@@ -83,12 +90,12 @@ fun UserRow(
     entries: List<UserListEntry>,
     navController: NavController,
 ) {
-    Row{
+    Row {
         UserEntry(
             entry = entries[rowIndex],
             navController = navController,
             modifier = Modifier.weight(1f),
-            )
+        )
     }
     Spacer(modifier = Modifier.height(16.dp))
 }
@@ -101,10 +108,19 @@ fun UserEntry(
     viewModel: UserListViewModel = hiltViewModel(),
 ) {
     Box(
-
+        modifier =
+            modifier
+                .shadow(5.dp, RoundedCornerShape(10.dp))
+                .clip(RoundedCornerShape(10.dp))
+                .border(2.dp, Color.White, RoundedCornerShape(10.dp))
+                .padding(8.dp)
+                .aspectRatio(1.25f)
+                .clickable {
+                    // onClick Event
+                },
     ) {
         Column {
-
+            // Displaying elements into the card
         }
     }
 }
