@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.apiuser.data.models.UserListEntry
+import dagger.hilt.android.lifecycle.HiltViewModel
 
 @Composable
 fun UserListScreen(
@@ -83,9 +84,29 @@ fun UserRow(
     navController: NavController,
 ) {
     Row{
-
+        UserEntry(
+            entry = entries[rowIndex],
+            navController = navController,
+            modifier = Modifier.weight(1f),
+            )
     }
     Spacer(modifier = Modifier.height(16.dp))
+}
+
+@Composable
+fun UserEntry(
+    entry: UserListEntry,
+    navController: NavController,
+    modifier: Modifier = Modifier,
+    viewModel: UserListViewModel = hiltViewModel(),
+) {
+    Box(
+
+    ) {
+        Column {
+
+        }
+    }
 }
 
 @Composable
