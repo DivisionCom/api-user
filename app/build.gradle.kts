@@ -83,6 +83,9 @@ dependencies {
     // Navigation Compose
     implementation("androidx.navigation:navigation-compose:2.7.6")
 
+    // Coil Compose
+    implementation("io.coil-kt:coil-compose:2.5.0")
+
     // Timber
     implementation("com.jakewharton.timber:timber:5.0.1")
 
