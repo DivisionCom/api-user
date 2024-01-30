@@ -19,6 +19,7 @@ class UserListViewModel
     ) : ViewModel() {
         val userList = mutableStateOf<List<UserListEntry>>(listOf())
         val loadError = mutableStateOf("")
+        val isRefreshing = mutableStateOf(false)
 
         init {
             loadUsers()
@@ -29,6 +30,7 @@ class UserListViewModel
                 val result = repository.getUserList(API_RESULTS)
                 when (result) {
                     is Resource.Success -> {
+                        isRefreshing.value = true
                         val userEntries =
                             result.data?.results?.mapIndexed { index, entry ->
                                 UserListEntry(
@@ -42,6 +44,7 @@ class UserListViewModel
 
                         loadError.value = ""
                         userList.value = userEntries!!
+                        isRefreshing.value = false
                     }
                     is Resource.Error -> {
                         loadError.value = result.message!!
