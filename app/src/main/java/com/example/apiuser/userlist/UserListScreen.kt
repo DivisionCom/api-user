@@ -1,5 +1,8 @@
 package com.example.apiuser.userlist
 
+import android.text.method.LinkMovementMethod
+import android.text.util.Linkify
+import android.widget.TextView
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -35,6 +38,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.viewinterop.AndroidView
+import androidx.core.text.util.LinkifyCompat
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.SubcomposeAsyncImage
@@ -157,12 +162,12 @@ fun UserEntry(
                 text = "${entry.name.title} ${entry.name.first} ${entry.name.last}",
                 textAlign = TextAlign.Center,
                 fontFamily = RobotoCondensed,
-                fontSize = 18.sp,
+                fontSize = 20.sp,
                 modifier =
                     Modifier
                         .fillMaxWidth(),
             )
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(16.dp))
             Text(
                 text = "${entry.street.number} ${entry.street.name}, ${entry.city}",
                 textAlign = TextAlign.Center,
@@ -172,15 +177,37 @@ fun UserEntry(
                         .fillMaxWidth(),
             )
             Spacer(modifier = Modifier.height(8.dp))
-            Text(
+            LinkifyText(
                 text = "Phone: ${entry.phone}",
-                textAlign = TextAlign.Center,
-                fontSize = 18.sp,
                 modifier =
-                    Modifier
-                        .fillMaxWidth(),
+                    modifier
+                        .align(CenterHorizontally),
             )
         }
+    }
+}
+
+@Composable
+fun LinkifyText(
+    text: String,
+    modifier: Modifier,
+) {
+    val mContext = LocalContext.current
+    val mCustomLinkifyText =
+        remember {
+            TextView(mContext)
+        }
+    AndroidView(
+        factory = { mCustomLinkifyText },
+        modifier =
+        modifier,
+    ) { textView ->
+        textView.text = text
+        textView.textSize = 18F
+        textView.setLinkTextColor(0xFF02003d.toInt())
+        textView.setTextColor(0xFF000000.toInt())
+        LinkifyCompat.addLinks(textView, Linkify.ALL)
+        textView.movementMethod = LinkMovementMethod.getInstance()
     }
 }
 
