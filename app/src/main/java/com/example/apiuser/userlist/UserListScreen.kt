@@ -153,9 +153,9 @@ fun UserEntry(
                     Modifier
                         .size(120.dp)
                         .align(Alignment.CenterHorizontally)
-                        .shadow(5.dp, RoundedCornerShape(10.dp))
-                        .clip(RoundedCornerShape(10.dp))
-                        .border(1.dp, Color.White, RoundedCornerShape(10.dp)),
+                        .shadow(5.dp, RoundedCornerShape(100.dp))
+                        .clip(RoundedCornerShape(100.dp))
+                        .border(2.dp, Color.White, RoundedCornerShape(100.dp)),
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
