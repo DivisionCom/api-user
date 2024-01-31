@@ -10,6 +10,4 @@ class UserDetailViewModel
     @Inject
     constructor(
         private val repository: UserRepository,
-    ) : ViewModel() {
-
-    }
+    ) : ViewModel()

@@ -50,6 +50,7 @@ import coil.compose.SubcomposeAsyncImage
 import coil.request.ImageRequest
 import com.example.apiuser.data.models.UserListEntry
 import com.example.apiuser.ui.theme.RobotoCondensed
+import timber.log.Timber
 
 @Composable
 fun UserListScreen(
@@ -153,7 +154,9 @@ fun UserEntry(
                 .padding(8.dp)
                 .aspectRatio(1.25f)
                 .clickable {
-                    // onClick Event
+                    navController.navigate(
+                        "user_detail_screen",
+                    )
                 },
     ) {
         Column {

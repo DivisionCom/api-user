@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.apiuser.ui.theme.APIUserTheme
+import com.example.apiuser.userdetail.UserDetailScreen
 import com.example.apiuser.userlist.UserListScreen
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,6 +26,7 @@ class MainActivity : ComponentActivity() {
                         UserListScreen(navController = navController)
                     }
                     composable("user_detail_screen") {
+                        UserDetailScreen(navController = navController)
                     }
                 }
             }
