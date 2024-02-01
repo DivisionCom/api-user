@@ -21,4 +21,14 @@ class UserRepository
                 }
             return Resource.Success(response)
         }
+
+        suspend fun getUserDetailList(seed: String): Resource<Response> {
+            val response =
+                try {
+                    api.getUserDetailList(seed)
+                } catch (e: Exception) {
+                    return Resource.Error("Ошибка соединения")
+                }
+            return Resource.Success(response)
+        }
     }

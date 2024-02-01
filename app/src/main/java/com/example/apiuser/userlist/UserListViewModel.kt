@@ -19,9 +19,9 @@ class UserListViewModel
         private val repository: UserRepository,
     ) : ViewModel() {
         val userList = mutableStateOf<List<UserListEntry>>(listOf())
-        val userDetail = mutableStateOf<List<UserDetailEntry>>(listOf())
         val loadError = mutableStateOf("")
         val isRefreshing = mutableStateOf(false)
+        val seedUserList = mutableStateOf("")
 
         init {
             loadUsers()
@@ -44,7 +44,7 @@ class UserListViewModel
                                 )
                             }
                         val userDetailEntries =
-                            result.data?.results?.mapIndexed{ index, entry ->
+                            result.data?.results?.mapIndexed { index, entry ->
                                 UserDetailEntry(
                                     gender = entry.gender,
                                     name = entry.name,
@@ -63,7 +63,7 @@ class UserListViewModel
 
                         loadError.value = ""
                         userList.value = userEntries!!
-                        userDetail.value = userDetailEntries!!
+                        seedUserList.value = result.data.info.seed
                         isRefreshing.value = false
                     }
                     is Resource.Error -> {

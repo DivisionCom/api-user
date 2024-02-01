@@ -9,4 +9,9 @@ interface UserApi {
     suspend fun getUserList(
         @Query("results") results: Int,
     ): Response
+
+    @GET("api")
+    suspend fun getUserDetailList(
+        @Query("seed") seed: String,
+    ): Response
 }

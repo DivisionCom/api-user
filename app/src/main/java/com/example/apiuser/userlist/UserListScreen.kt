@@ -3,7 +3,6 @@ package com.example.apiuser.userlist
 import android.text.method.LinkMovementMethod
 import android.text.util.Linkify
 import android.widget.TextView
-import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -50,7 +49,6 @@ import coil.compose.SubcomposeAsyncImage
 import coil.request.ImageRequest
 import com.example.apiuser.data.models.UserListEntry
 import com.example.apiuser.ui.theme.RobotoCondensed
-import timber.log.Timber
 
 @Composable
 fun UserListScreen(
@@ -73,6 +71,9 @@ fun UserList(
 ) {
     val userList by remember {
         viewModel.userList
+    }
+    val seedUserList by remember {
+        viewModel.seedUserList
     }
     val loadError by remember {
         viewModel.loadError
@@ -101,7 +102,7 @@ fun UserList(
                     userList.size + 1
                 }
             items(itemCount) {
-                UserRow(rowIndex = it, entries = userList, navController = navController)
+                UserRow(rowIndex = it, entries = userList, seed = seedUserList, navController = navController)
             }
         }
 
@@ -126,11 +127,14 @@ fun UserList(
 fun UserRow(
     rowIndex: Int,
     entries: List<UserListEntry>,
+    seed: String,
     navController: NavController,
 ) {
     Row {
         UserEntry(
             entry = entries[rowIndex],
+            seed = seed,
+            userIndex = rowIndex,
             navController = navController,
             modifier = Modifier.weight(1f),
         )
@@ -141,6 +145,8 @@ fun UserRow(
 @Composable
 fun UserEntry(
     entry: UserListEntry,
+    seed: String,
+    userIndex: Int,
     navController: NavController,
     modifier: Modifier = Modifier,
     viewModel: UserListViewModel = hiltViewModel(),
@@ -155,7 +161,7 @@ fun UserEntry(
                 .aspectRatio(1.25f)
                 .clickable {
                     navController.navigate(
-                        "user_detail_screen",
+                        "user_detail_screen/$seed/$userIndex",
                     )
                 },
     ) {
