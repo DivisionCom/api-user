@@ -18,6 +18,7 @@ class UserDetailViewModel
         private val repository: UserRepository,
     ) : ViewModel() {
         var userDetailList = mutableStateOf<List<UserDetailEntry>>(listOf())
+        val loadError = mutableStateOf("")
 
         fun loadUserDetailList(seed: String) {
             viewModelScope.launch {
@@ -42,9 +43,11 @@ class UserDetailViewModel
                                 )
                             }
 
+                        loadError.value = ""
                         userDetailList.value = userDetailEntries!!
                     }
                     is Resource.Error -> {
+                        loadError.value = result.message!!
                     }
                 }
             }

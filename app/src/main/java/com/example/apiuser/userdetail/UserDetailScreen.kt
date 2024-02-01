@@ -22,6 +22,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -64,6 +65,9 @@ fun UserDetailScreen(
 ) {
     val userDetailList by remember {
         viewModel.userDetailList
+    }
+    val loadError by remember {
+        viewModel.loadError
     }
 
     initViewModel(
@@ -133,6 +137,18 @@ fun UserDetailScreen(
                                 .clip(RoundedCornerShape(100.dp))
                                 .border(2.dp, Color.White, RoundedCornerShape(100.dp)),
                     )
+                }
+            }
+        }
+        Box(
+            contentAlignment = Alignment.Center,
+            modifier =
+                Modifier
+                    .fillMaxSize(),
+        ) {
+            if (loadError.isNotEmpty()) {
+                RetrySection(error = loadError) {
+                    viewModel.loadUserDetailList(seed)
                 }
             }
         }
@@ -321,6 +337,29 @@ fun UserDetailTopSection(
                         navController.popBackStack()
                     },
         )
+    }
+}
+
+@Composable
+fun RetrySection(
+    error: String,
+    onRetry: () -> Unit,
+) {
+    Column(modifier = Modifier.background(Color.White)) {
+        Text(
+            text = error,
+            color = Color.Red,
+            fontSize = 18.sp,
+        )
+        Spacer(modifier = Modifier.height(8.dp))
+        Button(
+            onClick = { onRetry() },
+            modifier =
+                Modifier
+                    .align(Alignment.CenterHorizontally),
+        ) {
+            Text(text = "Повторить попытку")
+        }
     }
 }
 
