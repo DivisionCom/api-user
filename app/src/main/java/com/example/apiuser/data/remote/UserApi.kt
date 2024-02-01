@@ -13,5 +13,6 @@ interface UserApi {
     @GET("api")
     suspend fun getUserDetailList(
         @Query("seed") seed: String,
+        @Query("results") results: Int,
     ): Response
 }

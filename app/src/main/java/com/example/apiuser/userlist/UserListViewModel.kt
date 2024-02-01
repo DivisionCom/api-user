@@ -3,7 +3,6 @@ package com.example.apiuser.userlist
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.apiuser.data.models.UserDetailEntry
 import com.example.apiuser.data.models.UserListEntry
 import com.example.apiuser.repository.UserRepository
 import com.example.apiuser.util.Constants.API_RESULTS
@@ -41,23 +40,6 @@ class UserListViewModel
                                     street = entry.location.street,
                                     phone = entry.phone,
                                     city = entry.location.city,
-                                )
-                            }
-                        val userDetailEntries =
-                            result.data?.results?.mapIndexed { index, entry ->
-                                UserDetailEntry(
-                                    gender = entry.gender,
-                                    name = entry.name,
-                                    location = entry.location,
-                                    email = entry.email,
-                                    login = entry.login,
-                                    dob = entry.dob,
-                                    registered = entry.registered,
-                                    phone = entry.phone,
-                                    cell = entry.cell,
-                                    id = entry.id,
-                                    picture = entry.picture,
-                                    nat = entry.nat,
                                 )
                             }
 
