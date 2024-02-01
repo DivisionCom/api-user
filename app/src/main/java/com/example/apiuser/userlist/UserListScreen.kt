@@ -3,6 +3,7 @@ package com.example.apiuser.userlist
 import android.text.method.LinkMovementMethod
 import android.text.util.Linkify
 import android.widget.TextView
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -247,7 +248,7 @@ fun RetrySection(
     error: String,
     onRetry: () -> Unit,
 ) {
-    Column {
+    Column(modifier = Modifier.background(Color.White)) {
         Text(
             text = error,
             color = Color.Red,
