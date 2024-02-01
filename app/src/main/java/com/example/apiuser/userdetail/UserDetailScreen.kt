@@ -39,6 +39,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -259,6 +260,8 @@ fun UserDetailWrapper(
                             ", " +
                             userDetailList[userIndex].location.coordinates.longitude +
                             ")",
+                    color = Color(0xFF02003d),
+                    textDecoration = TextDecoration.Underline,
                     textAlign = TextAlign.Left,
                     fontSize = 20.sp,
                     modifier =
