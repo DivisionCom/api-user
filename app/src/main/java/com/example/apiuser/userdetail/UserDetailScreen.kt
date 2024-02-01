@@ -1,12 +1,29 @@
 package com.example.apiuser.userdetail
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.apiuser.data.models.UserDetailEntry
-import timber.log.Timber
 
 @Composable
 fun UserDetailScreen(
@@ -22,22 +39,67 @@ fun UserDetailScreen(
     initViewModel(
         userDetailList = userDetailList,
         seed = seed,
-        userIndex = userIndex,
         viewModel = viewModel,
     )
+
+    Box(
+        modifier =
+            Modifier
+                .fillMaxSize()
+                .padding(bottom = 16.dp),
+    ) {
+        UserDetailTopSection(
+            navController = navController,
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .fillMaxHeight(0.2f)
+                    .align(Alignment.TopCenter),
+        )
+    }
+}
+
+@Composable
+fun UserDetailTopSection(
+    navController: NavController,
+    modifier: Modifier = Modifier,
+) {
+    Box(
+        contentAlignment = Alignment.TopStart,
+        modifier =
+            modifier
+                .background(
+                    Brush.verticalGradient(
+                        listOf(
+                            Color.Black,
+                            Color.Transparent,
+                        ),
+                    ),
+                ),
+    ) {
+        Icon(
+            imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+            contentDescription = null,
+            tint = Color.White,
+            modifier =
+                Modifier
+                    .size(36.dp)
+                    .offset(16.dp, 16.dp)
+                    .clickable {
+                        navController.popBackStack()
+                    },
+        )
+    }
 }
 
 fun initViewModel(
     userDetailList: List<UserDetailEntry>,
     seed: String,
-    userIndex: Int,
     viewModel: UserDetailViewModel,
 ) {
     if (seed.isNotEmpty()) {
         if (userDetailList.isEmpty()) {
             viewModel.loadUserDetailList(seed)
-        } else {
-            Timber.d("UserDebugDetail: ${userDetailList[userIndex].name}")
         }
     }
 }
